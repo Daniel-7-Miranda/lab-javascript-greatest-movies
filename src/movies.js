@@ -1,6 +1,3 @@
-// Iteration 1: All directors? - Get the array of all directors.
-// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
-// How could you "clean" a bit this array and make it unified (without duplicates)?
 const movies = [
     {
       title: 'The Shawshank Redemption',
@@ -2005,6 +2002,7 @@ const movies = [
     }
   ];
   
+// Iteration 1: All directors? - Get the array of all directors.
 
 function getAllDirectors(moviesArray) {
     
@@ -2013,13 +2011,54 @@ function getAllDirectors(moviesArray) {
 
 console.log(getAllDirectors(movies));
 
+// _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors.
+// How could you "clean" a bit this array and make it unified (without duplicates)?
+
+
+function getAllUniqueDirectors(moviesArray) {
+  let newArray=[];
+  let Array = [];
+  newArray=getAllDirectors(moviesArray).filter(director=>{
+    
+    //console.log(newArray);
+    if(!Array.includes(director)){
+      Array.push(director);
+      return true;
+    }
+    
+  }
+    //!getAllDirectors(moviesArray).includes(director) 
+    /*{
+      let newArray=[];
+    }
+      /*
+      
+      {if(newArray.includes("Stanley Kubrick")){
+      return director;
+    }}
+      
+      
+      {
+      if (newArray.includes(director))
+      {return director;}
+    }*/
+    );
+   return newArray;
+}
+
+console.log(getAllUniqueDirectors(movies));
+
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
+
+
 function howManyMovies(moviesArray) {
     return moviesArray.filter(movie => movie.genre.includes("Drama")&&movie.director === "Steven Spielberg");
 }
 
 console.log(howManyMovies(movies));
+
+
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 
 
@@ -2036,32 +2075,142 @@ function scoresAverage(moviesArray) {
     
     return rountToDec(avg,2);
 }
-/*
+
+
 function scoresAverage(moviesArray) {
     const totalScores = moviesArray.reduce((previous, current) => {
         return previous + current.score;
     }, 0);
     return totalScores / moviesArray.length;
 }
-*/
+
 console.log(scoresAverage(movies));
+
+
+
 // Iteration 4: Drama movies - Get the average of Drama Movies
+
+
 function dramaMoviesScore(moviesArray) {
   let filteredArray = moviesArray.filter(movie => movie.genre.includes("Drama"));
   return scoresAverage(filteredArray);
 }
 
 console.log(dramaMoviesScore(movies));
+
+/*
+
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
   
+  let new_array=[];
+  new_array = moviesArray;
+    
+  
+    
+    return new_array.sort((a,b)=>{
+      if(a.year === b.year){
+        if(a.title<b.title){return -1}
+        if(a.title>b.title){return 1}
+        if(a.title===b.title){return 0}
+      }
+      else{
+        if(a.year<b.year){return -1}
+        if(a.year>b.year){return 1}
+        if(a.year===b.year){return 0}
+      }
+      } 
+      
+    )
+
+    
+    //return a.year === b.year? a.year.localecompare(b.year);
+   
+    
+  }
+
+
+console.log(orderByYear(movies));
+// Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
+
+
+function orderAlphabetically(moviesArray) {
+  return moviesArray.filter(movie => moviesArray.indexOf(movie)<20).map(param => param.title);
 }
 
-// Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
-function orderAlphabetically(moviesArray) {}
 
+console.log(orderAlphabetically(movies));
+/*
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
-function turnHoursToMinutes(moviesArray) {}
+
+/*
+
+We got the info from the **IMDB** web page, but the duration info was saved in a format that is difficult for us to compare movies.
+
+Finding the longest movie is almost impossible using that format, so let's change it!
+
+- Create a `turnHoursToMinutes()` function that receives an array as a parameter and, with some _magic_ implemented by you - 
+replaces the duration info of each of the movies for its equivalent in minutes. For example:
+
+function turnHoursToMinutes(moviesArray) {
+  let new_array = [];
+  new_array = moviesArray;
+
+  new_array.forEach(movie => {
+    console.log(movie.duration.split(" ")[0].split("h")[0]);
+    //console.log(movie.duration.split(" ")[1].split("m")[0]);
+    //movie.duration = movie.duration.split(" ")[0].split("h")[0]*60 + movie.duration.split(" ")[1].split("m")[0];
+
+/*
+    let hours = string.split("h")[0]*60;
+
+    //return moviesArray.filter(movie => movie.genre.includes("Drama")&&movie.director === "Steven Spielberg");
+    let minutes = string.split("h")[1];
+    for(let i=0;i< minutes.length;i++){
+      
+      //console.log(typeof minutes[i]);
+      
+      
+      if(typeof minutes[i]!== 'number'){
+        minutes[1]="_";
+        //console.log(minutes);
+      }
+    }
+    
+    
+    //movie.duration= minutes;
+  
+  });
+
+  return new_array;
+}
+/*
+let string = "nome12"
+let arr_string = [];
+let number = "";
+
+for(let i= 0;i<string.length;i++){
+    arr_string.push(string[i]);
+
+    for(let j=0; j<arr_string.length;j++){
+      let calc = 0;
+      let compare =0;
+      calc = calc + arr_string[j];
+      if(compare<calc){
+        //console.log(arr_string[j]);
+        number = number + arr_string[j];
+      }
+    }
+}
+
+console.log(number);
+
+console.log(turnHoursToMinutes(movies));
+
+
+
+//2h 22min
 
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
 function bestYearAvg(moviesArray) {}
+*/
