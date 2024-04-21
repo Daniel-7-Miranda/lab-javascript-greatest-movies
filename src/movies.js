@@ -2027,7 +2027,7 @@ console.log(getAllDirectors(movies));
 
 
 function howManyMovies(moviesArray) {
-    return moviesArray.filter(movie => movie.genre.includes("Drama")&&movie.director === "Steven Spielberg");
+    return moviesArray.filter(movie => movie.genre.includes("Drama")&&movie.director === "Steven Spielberg").length;
 }
 
 console.log(howManyMovies(movies));
@@ -2041,23 +2041,35 @@ function scoresAverage(moviesArray) {
     return Math.round(num*Math.pow(10,dec))/Math.pow(10,dec)
   }
 
-    const avg = moviesArray.reduce((previous, current) => {
-            //console.log(previous.score);
-            return previous + current.score;
-    },0)/moviesArray.length;
+  if(moviesArray!== undefined)
+  {
+    FilteredArray = moviesArray.filter(OMovie => OMovie.score!==undefined);
 
+    if(FilteredArray.length>0){
+      let avg = FilteredArray.reduce((previous, current) => {
+        return previous + current.score;
+      },0)/moviesArray.length;
+
+      return rountToDec(avg,2);
+    }
+    else{
+      return 0;
+    }
+  }
+  else{
+    return 0;
+  }
     
-    return rountToDec(avg,2);
 }
 
-
+/*
 function scoresAverage(moviesArray) {
     const totalScores = moviesArray.reduce((previous, current) => {
         return previous + current.score;
     }, 0);
     return totalScores / moviesArray.length;
 }
-
+*/
 console.log(scoresAverage(movies));
 
 
@@ -2071,7 +2083,7 @@ function dramaMoviesScore(moviesArray) {
 }
 
 console.log(dramaMoviesScore(movies));
-
+/*
 
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
