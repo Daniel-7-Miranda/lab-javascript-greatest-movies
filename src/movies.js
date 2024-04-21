@@ -2017,32 +2017,16 @@ console.log(getAllDirectors(movies));
 
 function getAllUniqueDirectors(moviesArray) {
   let newArray=[];
-  let Array = [];
+  let Directors = [];
   newArray=getAllDirectors(moviesArray).filter(director=>{
-    
-    //console.log(newArray);
-    if(!Array.includes(director)){
-      Array.push(director);
+  
+    if(!Directors.includes(director)){
+      Directors.push(director);
       return true;
     }
     
   }
-    //!getAllDirectors(moviesArray).includes(director) 
-    /*{
-      let newArray=[];
-    }
-      /*
-      
-      {if(newArray.includes("Stanley Kubrick")){
-      return director;
-    }}
-      
-      
-      {
-      if (newArray.includes(director))
-      {return director;}
-    }*/
-    );
+  );
    return newArray;
 }
 
@@ -2098,15 +2082,13 @@ function dramaMoviesScore(moviesArray) {
 
 console.log(dramaMoviesScore(movies));
 
-/*
+
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
   
   let new_array=[];
   new_array = moviesArray;
-    
-  
     
     return new_array.sort((a,b)=>{
       if(a.year === b.year){
@@ -2122,15 +2104,13 @@ function orderByYear(moviesArray) {
       } 
       
     )
-
-    
-    //return a.year === b.year? a.year.localecompare(b.year);
-   
     
   }
 
 
 console.log(orderByYear(movies));
+
+
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
 
 
@@ -2140,77 +2120,60 @@ function orderAlphabetically(moviesArray) {
 
 
 console.log(orderAlphabetically(movies));
-/*
+
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
-/*
-
-We got the info from the **IMDB** web page, but the duration info was saved in a format that is difficult for us to compare movies.
-
-Finding the longest movie is almost impossible using that format, so let's change it!
-
-- Create a `turnHoursToMinutes()` function that receives an array as a parameter and, with some _magic_ implemented by you - 
-replaces the duration info of each of the movies for its equivalent in minutes. For example:
-
 function turnHoursToMinutes(moviesArray) {
-  let new_array = [];
-  new_array = moviesArray;
 
-  new_array.forEach(movie => {
-    console.log(movie.duration.split(" ")[0].split("h")[0]);
-    //console.log(movie.duration.split(" ")[1].split("m")[0]);
-    //movie.duration = movie.duration.split(" ")[0].split("h")[0]*60 + movie.duration.split(" ")[1].split("m")[0];
-
-/*
-    let hours = string.split("h")[0]*60;
-
-    //return moviesArray.filter(movie => movie.genre.includes("Drama")&&movie.director === "Steven Spielberg");
-    let minutes = string.split("h")[1];
-    for(let i=0;i< minutes.length;i++){
-      
-      //console.log(typeof minutes[i]);
-      
-      
-      if(typeof minutes[i]!== 'number'){
-        minutes[1]="_";
-        //console.log(minutes);
-      }
-    }
-    
-    
-    //movie.duration= minutes;
-  
-  });
-
-  return new_array;
+  return moviesArray.map(movie => {
+    movie.duration = movie.duration.split(" ")[0].split("h")[0] + movie.duration.split(" ")[1];
+    return movie;
+})
 }
-/*
-let string = "nome12"
-let arr_string = [];
-let number = "";
-
-for(let i= 0;i<string.length;i++){
-    arr_string.push(string[i]);
-
-    for(let j=0; j<arr_string.length;j++){
-      let calc = 0;
-      let compare =0;
-      calc = calc + arr_string[j];
-      if(compare<calc){
-        //console.log(arr_string[j]);
-        number = number + arr_string[j];
-      }
-    }
-}
-
-console.log(number);
 
 console.log(turnHoursToMinutes(movies));
 
-
-
-//2h 22min
-
 // BONUS - Iteration 8: Best yearly score average - Best yearly score average
-function bestYearAvg(moviesArray) {}
-*/
+
+
+function bestYearAvg(moviesArray) {
+  
+
+  let ObjectFormat = moviesArray.map(MovieObj => 
+    {return{
+      score: MovieObj.score,
+      year: MovieObj.year
+    };}
+  );
+
+  let Years = [];
+  let ScoresPerYear= ObjectFormat.filter(OMovie=>{ 
+    if(!Years.includes(OMovie.year))
+    {
+      Years.push(OMovie.year);
+      return true
+  }}).map(Year => Year = ObjectFormat
+    .filter(OMovie=> OMovie.year === Year.year));
+    
+  let AveragePerYear=  ScoresPerYear.map(ScoresPerYear=> {
+    return {
+      score: ScoresPerYear.map(Movie=>Movie.score).reduce((a,b)=>{return a+b},0)/ScoresPerYear.length,
+      year: ScoresPerYear[0].year
+    }
+  }
+  );
+    
+  let SortedAvg= AveragePerYear.sort((a,b)=>{
+    if(a.score>b.score){return -1};
+    if(a.score<b.score){return 1};
+    if(a.score===b.score){return 0};
+  });
+
+
+
+  return `The best year was ${SortedAvg[0].year} with an average score of ${SortedAvg[0].score}`;
+    
+}
+
+console.log(bestYearAvg(movies));
+
