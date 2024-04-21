@@ -2048,7 +2048,7 @@ function scoresAverage(moviesArray) {
     if(FilteredArray.length>0){
       let avg = FilteredArray.reduce((previous, current) => {
         return previous + current.score;
-      },0)/moviesArray.length;
+      },0)/FilteredArray.length;
 
       return rountToDec(avg,2);
     }
@@ -2178,4 +2178,3 @@ function bestYearAvg(moviesArray) {
 }
 
 console.log(bestYearAvg(movies));
-*/
