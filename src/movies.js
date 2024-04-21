@@ -2083,7 +2083,7 @@ function dramaMoviesScore(moviesArray) {
 }
 
 console.log(dramaMoviesScore(movies));
-/*
+
 
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
