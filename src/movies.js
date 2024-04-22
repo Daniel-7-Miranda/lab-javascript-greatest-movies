@@ -2086,11 +2086,8 @@ console.log(dramaMoviesScore(movies));
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(moviesArray) {
-  
-  let new_array=[];
-  new_array = moviesArray;
     
-    return new_array.sort((a,b)=>{
+    return [...moviesArray].sort((a,b)=>{
       if(a.year === b.year){
         if(a.title<b.title){return -1}
         if(a.title>b.title){return 1}
@@ -2115,11 +2112,14 @@ console.log(orderByYear(movies));
 
 
 function orderAlphabetically(moviesArray) {
-  return moviesArray.filter(movie => moviesArray.indexOf(movie)<20).map(param => param.title).sort((a,b)=>{
+
+
+  return [...moviesArray].sort((a,b)=>{
     if(a>b){return 1}
     if(a<b){return -1}
     if(a===b){return 0}
-  });
+  })
+  .filter(movie => moviesArray.indexOf(movie)<20).map(param => param.title);
 }
 
 
@@ -2130,10 +2130,16 @@ console.log(orderAlphabetically(movies));
 function turnHoursToMinutes(moviesArray) {
 
   return moviesArray.map(movie => {
-    movie.duration = movie.duration.split(" ")[0].split("h")[0] + movie.duration.split(" ")[1];
+    let minutes=0;
+    if(movie.duration.split(" ")[1]!==undefined){
+      minutes = movie.duration.split(" ")[1].split("m")[0]*1;
+    }
+    movie.duration = `${movie.duration.split(" ")[0].split("h")[0]*60 + minutes}min`;
     return movie;
 })
 }
+
+
 
 console.log(turnHoursToMinutes(movies));
 
@@ -2170,7 +2176,11 @@ function bestYearAvg(moviesArray) {
   let SortedAvg= AveragePerYear.sort((a,b)=>{
     if(a.score>b.score){return -1};
     if(a.score<b.score){return 1};
-    if(a.score===b.score){return 0};
+    if(a.score===b.score){
+      if(a.year>a.year){return -1};
+      if(a.year>b.year){return 1};
+      if(a.year<b.year){return 0};
+    };
   });
 
 
