@@ -2003,7 +2003,7 @@ const movies = [
   ];
   
 // Iteration 1: All directors? - Get the array of all directors.
-
+/*
 function getAllDirectors(moviesArray) {
 
     return moviesArray.map(movie => movie.director);
@@ -2115,16 +2115,16 @@ function orderAlphabetically(moviesArray) {
 
 
   return [...moviesArray].sort((a,b)=>{
-    if(a>b){return 1}
-    if(a<b){return -1}
-    if(a===b){return 0}
+    if(a.title>b.title){return 1}
+    if(a.title<b.title){return -1}
+    if(a.title===b.title){return 0}
   })
   .filter(movie => moviesArray.indexOf(movie)<20).map(param => param.title);
 }
 
 
 console.log(orderAlphabetically(movies));
-
+*/
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
 function turnHoursToMinutes(moviesArray) {
